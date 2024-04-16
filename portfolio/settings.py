@@ -77,13 +77,22 @@ WSGI_APPLICATION = "portfolio.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+MONGO_HOST=os.environ["MONGO_HOST"]
+MONGO_USERNAME=os.environ["MONGO_USERNAME"]
+MONGO_PASS=os.environ["MONGO_PASS"]
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "djongo",
+        "NAME": "mongo",
+        "CLIENT": {
+            "host": MONGO_HOST,
+            "username": MONGO_USERNAME,
+            "password": MONGO_PASS,
+            "authSource": "admin",
+        },
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
